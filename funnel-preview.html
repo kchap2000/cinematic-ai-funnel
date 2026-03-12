@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Funnel Preview — Cinematic AI Workflow Masterclass</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; background: #0d0d1a; color: #fff; }
+
+    /* ── TOP NAV ── */
+    .nav { position: sticky; top: 0; z-index: 100; background: #0d0d1a; border-bottom: 2px solid #e94560; display: flex; align-items: center; gap: 0; overflow-x: auto; }
+    .nav-brand { padding: 0 20px; font-size: 13px; font-weight: 700; color: #e94560; letter-spacing: 0.05em; white-space: nowrap; border-right: 1px solid #222; height: 48px; display: flex; align-items: center; }
+    .nav-btn { padding: 0 18px; height: 48px; background: none; border: none; color: #8899aa; font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap; border-right: 1px solid #111; transition: all 0.15s; }
+    .nav-btn:hover { color: #fff; background: #1a1a2e; }
+    .nav-btn.active { color: #fff; background: #0f3460; border-bottom: 3px solid #e94560; }
+    .nav-note { margin-left: auto; padding: 0 16px; font-size: 11px; color: #445566; white-space: nowrap; }
+
+    /* ── FRAMES ── */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* ── INLINE PAGE STYLES ── */
+    .page-wrap { background: #1a1a2e; color: #fff; line-height: 1.6; }
+    section { padding: 60px 24px; }
+    .inner { max-width: 780px; margin: 0 auto; }
+    .topbar { background: #0f3460; text-align: center; padding: 10px; font-size: 13px; color: #ccc; }
+    h1 { font-size: clamp(26px, 4.5vw, 44px); font-weight: 900; line-height: 1.15; }
+    h2 { font-size: clamp(20px, 3.5vw, 32px); font-weight: 700; line-height: 1.25; margin-bottom: 14px; }
+    h3 { font-size: 20px; font-weight: 700; margin-bottom: 10px; }
+    p { font-size: 16px; color: #c8cfdf; margin-bottom: 16px; }
+    .callout { font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: #e94560; margin-bottom: 18px; }
+    .subhead { font-size: clamp(14px, 2.2vw, 19px); color: #c8cfdf; text-align: center; max-width: 640px; margin: 0 auto 36px; }
+    .btn-cta { display: block; max-width: 480px; margin: 0 auto 10px; padding: 18px 36px; background: #e94560; color: #fff; font-size: 18px; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; text-align: center; text-decoration: none; }
+    .btn-nav { display: block; max-width: 480px; margin: 0 auto 10px; padding: 18px 36px; background: #e94560; color: #fff; font-size: 18px; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; text-align: center; }
+    .btn-sub { font-size: 12px; color: #8899aa; text-align: center; display: block; max-width: 480px; margin: 0 auto 36px; }
+    .form-wrap { background: #0f3460; border: 1px solid #1e4a80; border-radius: 12px; padding: 32px; max-width: 500px; margin: 0 auto 28px; }
+    .form-wrap input { display: block; width: 100%; padding: 13px 14px; margin-bottom: 12px; border-radius: 6px; border: 1px solid #2a5080; background: #1a1a2e; color: #fff; font-size: 15px; }
+    .form-wrap input::placeholder { color: #7a8ba0; }
+    .offer-box { background: #0f3460; border: 2px solid #e94560; border-radius: 12px; padding: 28px; max-width: 540px; margin: 0 auto 32px; }
+    .offer-box p { margin: 6px 0; font-size: 15px; }
+    .offer-box .val { color: #fff; font-weight: 700; }
+    .offer-box .lbl { color: #8899aa; }
+    .video-wrap { background: #0a0a1a; border: 2px solid #0f3460; border-radius: 10px; max-width: 680px; margin: 0 auto 28px; aspect-ratio: 16/9; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .play-icon { width: 60px; height: 60px; background: #e94560; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 10px; }
+    .module-card { background: #0f3460; border-left: 4px solid #e94560; border-radius: 6px; padding: 16px 18px; margin-bottom: 12px; }
+    .module-card .num { font-size: 11px; letter-spacing: 0.1em; color: #e94560; text-transform: uppercase; margin-bottom: 3px; }
+    .module-card h4 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+    .module-card p { font-size: 13px; color: #aabbd0; margin: 0; }
+    .faq-item { border-bottom: 1px solid #1e2e4a; padding: 16px 0; }
+    .faq-q { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+    .faq-a { font-size: 14px; color: #aabbd0; margin: 0; }
+    .guarantee-box { max-width: 580px; margin: 0 auto; text-align: center; }
+    .guarantee-badge { width: 80px; height: 80px; border: 4px solid #e94560; border-radius: 50%; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 32px; }
+    .avatar { width: 80px; height: 80px; border-radius: 50%; background: #1a1a2e; border: 3px solid #e94560; display: flex; align-items: center; justify-content: center; font-size: 32px; margin-bottom: 14px; }
+    .checkout-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 880px; margin: 0 auto; }
+    @media (max-width: 600px) { .checkout-grid { grid-template-columns: 1fr; } }
+    .card { background: #0f3460; border-radius: 12px; padding: 24px; }
+    .card input { display: block; width: 100%; padding: 12px 13px; margin-bottom: 12px; border-radius: 6px; border: 1px solid #2a4a6a; background: #1a1a2e; color: #fff; font-size: 14px; }
+    .card input::placeholder { color: #5a6a7a; }
+    .step-card { display: flex; gap: 16px; background: #0f3460; border-radius: 10px; padding: 18px; margin-bottom: 12px; }
+    .step-num { width: 40px; height: 40px; background: #e94560; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 900; flex-shrink: 0; }
+    .badge { display: inline-block; background: #e94560; color: #fff; font-size: 12px; font-weight: 700; padding: 5px 14px; border-radius: 20px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 20px; }
+    .includes ul { list-style: none; }
+    .includes ul li { font-size: 14px; color: #c8cfdf; padding: 5px 0 5px 22px; position: relative; border-bottom: 1px solid #1e3a60; }
+    .includes ul li::before { content: "✓"; position: absolute; left: 0; color: #e94560; font-weight: 700; }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════
+     NAV
+══════════════════════════════════════════════ -->
+<nav class="nav">
+  <div class="nav-brand">FUNNEL PREVIEW</div>
+  <button class="nav-btn active" onclick="show(0)">① Opt-In</button>
+  <button class="nav-btn" onclick="show(1)">② Free Training</button>
+  <button class="nav-btn" onclick="show(2)">③ Sales Page</button>
+  <button class="nav-btn" onclick="show(3)">④ Checkout</button>
+  <button class="nav-btn" onclick="show(4)">⑤ Thank You</button>
+  <span class="nav-note">Cinematic AI Workflow Masterclass · $497</span>
+</nav>
+
+<!-- ══════════════════════════════════════════════
+     PAGE 1: OPT-IN
+══════════════════════════════════════════════ -->
+<div class="page active page-wrap" id="p0">
+  <div class="topbar">AI for Real Life &nbsp;|&nbsp; Khalil Chapman</div>
+  <section style="text-align:center;">
+    <div class="inner">
+      <p class="callout">For Creators, Filmmakers &amp; Storytellers Who Want to Use AI to Make Real Films</p>
+      <h1 style="margin-bottom:18px;">How to Create Cinematic AI Videos Without Wasting Months Testing Tools</h1>
+      <p class="subhead">Watch the free training and learn the 3-step filmmaking framework that turns AI tools into a real production workflow — so your projects look like film, not experiments.</p>
+      <div class="form-wrap">
+        <input type="text" placeholder="First Name" />
+        <input type="email" placeholder="Email Address" />
+        <button class="btn-nav" onclick="show(1)">Watch the Free Training →</button>
+      </div>
+      <p style="font-size:13px;color:#8899aa;margin-bottom:40px;">Used by creators, filmmakers, and storytellers building cinematic AI projects</p>
+      <h3 style="margin-bottom:16px;">Inside the free training you'll discover:</h3>
+      <div style="text-align:left;max-width:560px;margin:0 auto;">
+        <p style="padding:10px 0 10px 28px;position:relative;border-bottom:1px solid #1e2e4a;"><span style="position:absolute;left:0;color:#e94560;font-weight:700;">→</span>Why most AI videos look random — and the one shift that fixes it</p>
+        <p style="padding:10px 0 10px 28px;position:relative;border-bottom:1px solid #1e2e4a;"><span style="position:absolute;left:0;color:#e94560;font-weight:700;">→</span>The 3-tool workflow that produces cinematic results without years of film school</p>
+        <p style="padding:10px 0 10px 28px;position:relative;"><span style="position:absolute;left:0;color:#e94560;font-weight:700;">→</span>How to build a real filmmaking system you can use on any project</p>
+      </div>
+    </div>
+  </section>
+  <section style="background:#0f3460;padding:40px 24px;text-align:center;">
+    <div class="avatar" style="margin:0 auto 14px;">K</div>
+    <p style="max-width:560px;margin:0 auto;font-size:15px;color:#c8cfdf;">Khalil Chapman (Kalo) has spent years deep in the AI filmmaking space — building cinematic projects like <em>The Switch</em>, <em>Crazy in Valencia</em>, and the <em>Lazy Mon</em> storytelling universe. AI for Real Life is where he shares the workflow behind all of it.</p>
+  </section>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PAGE 2: FREE TRAINING
+══════════════════════════════════════════════ -->
+<div class="page page-wrap" id="p1">
+  <div class="topbar">AI for Real Life &nbsp;|&nbsp; Khalil Chapman</div>
+  <section style="text-align:center;">
+    <div class="inner">
+      <p class="callout">You're In — Your Free Training is Ready Below</p>
+      <h1 style="margin-bottom:14px;">Watch: How to Create Cinematic AI Videos Without Wasting Months Testing Tools</h1>
+      <p class="subhead">Stay until the end — in the final minutes Khalil shares the complete filmmaking system and how to get full access.</p>
+      <div class="video-wrap">
+        <div class="play-icon">▶</div>
+        <p style="font-size:13px;color:#4a5a70;">[VSL embed goes here — Loom or Vimeo]</p>
+      </div>
+      <p style="font-size:13px;color:#8899aa;margin-bottom:8px;">▶ Press Play to Watch the Free Training</p>
+      <button class="btn-nav" style="max-width:440px;" onclick="show(2)">Yes — I Want the Full System →</button>
+      <p style="font-size:13px;color:#8899aa;margin:16px 0;">Used by creators and filmmakers building cinematic AI projects in 30 days</p>
+      <button class="btn-nav" style="max-width:480px;background:transparent;border:2px solid #e94560;" onclick="show(2)">Get Instant Access to the Cinematic AI Workflow Masterclass →</button>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PAGE 3: SALES
+══════════════════════════════════════════════ -->
+<div class="page page-wrap" id="p2">
+  <div class="topbar">AI for Real Life &nbsp;|&nbsp; Khalil Chapman</div>
+  <section style="text-align:center;">
+    <div class="inner">
+      <h1 style="margin-bottom:14px;">Make Cinematic Films With AI</h1>
+      <p class="subhead">Learn the complete filmmaking workflow designed for the AI era. Turn ideas into cinematic AI films by following a clear process from concept through generation, motion, editing, and final release.</p>
+      <div class="video-wrap" style="margin-bottom:28px;">
+        <div class="play-icon">▶</div>
+        <p style="font-size:13px;color:#4a5a70;">[3–4 min offer video goes here]</p>
+      </div>
+      <div class="offer-box">
+        <p><span class="lbl">Program: </span><span class="val">Cinematic AI Workflow Masterclass</span></p>
+        <p><span class="lbl">Price: </span><span class="val">$497 one-time — full lifetime access</span></p>
+        <p><span class="lbl">Outcome: </span><span class="val">Your first cinematic AI film in 30 days</span></p>
+        <p><span class="lbl">Guarantee: </span><span class="val">14-day full refund — zero risk</span></p>
+      </div>
+      <button class="btn-nav" onclick="show(3)">Get Instant Access — $497 →</button>
+      <span class="btn-sub">14-Day Money Back Guarantee · Instant Access · Lifetime Updates</span>
+    </div>
+  </section>
+  <section style="background:#0f3460;padding:36px 24px;text-align:center;">
+    <p style="max-width:600px;margin:0 auto;font-size:15px;">Khalil has spent years building cinematic AI projects — <em>The Switch</em>, <em>Crazy in Valencia</em>, <em>Zero Sum Game</em>, and the <em>Lazy Mon</em> storytelling universe.</p>
+  </section>
+  <section>
+    <div class="inner">
+      <h2 style="text-align:center;margin-bottom:24px;">Here's Everything Inside the Cinematic AI Workflow Masterclass</h2>
+      <div class="module-card"><div class="num">Module 1</div><h4>Develop Film Concepts That Actually Work</h4><p>Turn raw ideas into strong story concepts designed for cinematic AI execution</p></div>
+      <div class="module-card"><div class="num">Module 2</div><h4>Build a Clear Story Structure</h4><p>Map your narrative using beat maps and simple story frameworks before any visuals are generated</p></div>
+      <div class="module-card"><div class="num">Module 3</div><h4>Design Characters and Worlds</h4><p>Create consistent characters, environments, and visual styles that hold across every AI shot</p></div>
+      <div class="module-card"><div class="num">Module 4</div><h4>Plan Cinematic Shots Like a Director</h4><p>Translate your story into shot lists and visual sequences that feel like real film coverage</p></div>
+      <div class="module-card"><div class="num">Module 5</div><h4>Generate High-Quality AI Visuals</h4><p>Prompt and generate cinematic images that match your story and maintain visual consistency</p></div>
+      <div class="module-card"><div class="num">Module 6</div><h4>Bring Scenes to Life With AI Motion</h4><p>Convert static visuals into dynamic video sequences using modern AI video tools</p></div>
+      <div class="module-card"><div class="num">Module 7</div><h4>Assemble Your Film</h4><p>Structure your shots into sequences that feel like real scenes rather than random AI clips</p></div>
+      <div class="module-card"><div class="num">Module 8</div><h4>Edit and Finish Your Project</h4><p>Add pacing, sound, music, and polish so the final piece feels like a finished cinematic project</p></div>
+      <div style="margin-top:28px;">
+        <button class="btn-nav" onclick="show(3)">Get Instant Access — $497 →</button>
+        <span class="btn-sub">14-Day Money Back Guarantee · Instant Access · Lifetime Updates</span>
+      </div>
+    </div>
+  </section>
+  <section style="background:#0f3460;">
+    <div class="inner" style="display:flex;gap:24px;align-items:flex-start;max-width:680px;">
+      <div class="avatar" style="flex-shrink:0;">K</div>
+      <div>
+        <h3>About Khalil Chapman (Kalo)</h3>
+        <p>Khalil has spent years deep in the AI filmmaking space — testing just about every tool that exists and building a cinematic workflow from the ground up. AI for Real Life is where he shares the real system behind all of it — not theory, not experiments, but a production pipeline that actually works.</p>
+      </div>
+    </div>
+  </section>
+  <section style="background:#0b1628;">
+    <div class="inner">
+      <div class="guarantee-box">
+        <div class="guarantee-badge">✓</div>
+        <h3>14-Day Money Back Guarantee</h3>
+        <p>Go through the core lessons. Implement the workflow. If you don't feel like the system gives you a clear path to creating your own cinematic AI film projects, message us within 14 days for a full refund. No questions asked.</p>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="inner" style="text-align:center;">
+      <h2 style="margin-bottom:8px;">Frequently Asked Questions</h2>
+      <div style="max-width:640px;margin:24px auto 0;text-align:left;">
+        <div class="faq-item"><p class="faq-q">Do I need filmmaking experience?</p><p class="faq-a">No. The system teaches filmmaking thinking alongside AI tools. You'll learn both together from scratch.</p></div>
+        <div class="faq-item"><p class="faq-q">Which AI tools do I need?</p><p class="faq-a">The program covers the most effective tools available, and updates as new tools emerge. Most have free tiers to start.</p></div>
+        <div class="faq-item"><p class="faq-q">How long to see results?</p><p class="faq-a">The workflow is designed to produce your first complete AI film project in about 30 days.</p></div>
+        <div class="faq-item"><p class="faq-q">Is this just random AI clips?</p><p class="faq-a">No. This is a complete filmmaking pipeline — story, characters, shots, generation, motion, editing, and finishing.</p></div>
+      </div>
+      <div style="margin-top:32px;">
+        <p style="font-style:italic;font-size:15px;max-width:560px;margin:0 auto 24px;">P.S. — AI filmmaking is still in its early stages. The window to get in early doesn't stay open forever.</p>
+        <button class="btn-nav" onclick="show(3)">Get Instant Access — $497 →</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PAGE 4: CHECKOUT
+══════════════════════════════════════════════ -->
+<div class="page page-wrap" id="p3">
+  <div class="topbar" style="background:#0f3460;padding:16px 24px;">
+    <div style="font-size:16px;font-weight:700;">AI for Real Life</div>
+    <div style="font-size:12px;color:#8899aa;margin-top:4px;">Join creators building cinematic AI projects</div>
+  </div>
+  <section>
+    <div class="checkout-grid">
+      <div class="card">
+        <h3 style="margin-bottom:16px;border-bottom:1px solid #1e3a60;padding-bottom:12px;">Order Summary</h3>
+        <p style="font-size:18px;font-weight:700;margin-bottom:4px;">Cinematic AI Workflow Masterclass</p>
+        <p style="font-size:32px;font-weight:900;color:#e94560;margin-bottom:4px;">$497</p>
+        <p style="font-size:12px;color:#8899aa;margin-bottom:20px;">One-time payment — lifetime access</p>
+        <div class="includes">
+          <p style="font-size:12px;color:#8899aa;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:8px;">You're getting:</p>
+          <ul>
+            <li>All 8 core modules</li>
+            <li>AI tool updates (lifetime)</li>
+            <li>Private community access</li>
+            <li>14-day money back guarantee</li>
+          </ul>
+        </div>
+        <div style="background:#1a1a2e;border-radius:8px;padding:14px;text-align:center;margin-top:16px;">
+          <p style="font-size:13px;margin:0;">🔒 <strong style="color:#e94560;">14-Day Money Back Guarantee</strong><br/>Zero risk. Message us within 14 days for a full refund.</p>
+        </div>
+      </div>
+      <div class="card">
+        <h3 style="margin-bottom:16px;border-bottom:1px solid #1e3a60;padding-bottom:12px;">Complete Your Order</h3>
+        <label style="font-size:12px;color:#8899aa;text-transform:uppercase;letter-spacing:0.06em;display:block;margin-bottom:6px;">Full Name</label>
+        <input type="text" placeholder="Your name" />
+        <label style="font-size:12px;color:#8899aa;text-transform:uppercase;letter-spacing:0.06em;display:block;margin-bottom:6px;">Email Address</label>
+        <input type="email" placeholder="your@email.com" />
+        <label style="font-size:12px;color:#8899aa;text-transform:uppercase;letter-spacing:0.06em;display:block;margin-bottom:6px;">Card Number</label>
+        <input type="text" placeholder="1234 5678 9012 3456" />
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div><label style="font-size:12px;color:#8899aa;text-transform:uppercase;letter-spacing:0.06em;display:block;margin-bottom:6px;">Expiry</label><input type="text" placeholder="MM / YY" /></div>
+          <div><label style="font-size:12px;color:#8899aa;text-transform:uppercase;letter-spacing:0.06em;display:block;margin-bottom:6px;">CVC</label><input type="text" placeholder="•••" /></div>
+        </div>
+        <button class="btn-nav" style="margin-top:8px;max-width:100%;padding:16px;" onclick="show(4)">Complete Purchase — $497 →</button>
+        <p style="text-align:center;font-size:11px;color:#5a6a7a;margin-top:10px;">🔒 Secured by Stripe — 256-bit SSL encryption</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PAGE 5: THANK YOU
+══════════════════════════════════════════════ -->
+<div class="page page-wrap" id="p4">
+  <div class="topbar">AI for Real Life &nbsp;|&nbsp; Khalil Chapman</div>
+  <section style="text-align:center;">
+    <div class="inner" style="max-width:640px;">
+      <span class="badge">🎬 Purchase Confirmed</span>
+      <h1 style="margin-bottom:14px;">You're In. Welcome to the Cinematic AI Workflow Masterclass.</h1>
+      <p style="max-width:520px;margin:0 auto 36px;">Check your email — your access link and receipt have been sent. If you don't see it within a few minutes, check your spam folder.</p>
+    </div>
+  </section>
+  <div style="max-width:600px;margin:0 auto;padding:0 24px 48px;">
+    <h3 style="text-align:center;margin-bottom:20px;">Here's what to do right now:</h3>
+    <div class="step-card"><div class="step-num">1</div><div><h4 style="margin-bottom:4px;">Check your email</h4><p style="font-size:14px;color:#aabbd0;margin:0;">Your login credentials and course access link have been sent to the email you used at checkout.</p></div></div>
+    <div class="step-card"><div class="step-num">2</div><div><h4 style="margin-bottom:4px;">Log in and start Module 1</h4><p style="font-size:14px;color:#aabbd0;margin:0;">Begin with Develop Film Concepts That Actually Work. Don't skip ahead — the workflow builds on itself.</p></div></div>
+    <div class="step-card"><div class="step-num">3</div><div><h4 style="margin-bottom:4px;">Join the community</h4><p style="font-size:14px;color:#aabbd0;margin:0;">Connect with other creators building cinematic AI projects. Post your first introduction in #welcome.</p></div></div>
+    <div style="text-align:center;margin-top:32px;">
+      <button class="btn-nav" style="max-width:340px;">Access Your Course →</button>
+    </div>
+  </div>
+  <section style="background:#0f3460;text-align:center;padding:40px 24px;">
+    <h2 style="margin-bottom:10px;">Join the AI Filmmakers Community</h2>
+    <p style="max-width:480px;margin:0 auto 20px;font-size:15px;">Get help, share your projects, stay on track, and connect with creators building in the same space.</p>
+    <button style="padding:13px 32px;background:transparent;color:#fff;font-size:15px;font-weight:600;border:2px solid #e94560;border-radius:6px;cursor:pointer;">Join the Community →</button>
+  </section>
+</div>
+
+<script>
+  function show(idx) {
+    document.querySelectorAll('.page').forEach((p, i) => p.classList.toggle('active', i === idx));
+    document.querySelectorAll('.nav-btn').forEach((b, i) => b.classList.toggle('active', i === idx));
+    window.scrollTo(0, 0);
+  }
+</script>
+</body>
+</html>
