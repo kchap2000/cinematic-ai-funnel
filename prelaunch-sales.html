@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI for Real Filmmakers — Founding Member Bundle ($49)</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #1a1a2e; color: #ffffff; font-family: 'Georgia', serif; line-height: 1.7; }
+
+    .topbar { background: #0f3460; text-align: center; padding: 10px; font-size: 13px; color: #ccc; letter-spacing: 0.03em; }
+
+    section { padding: 60px 24px; }
+    .inner { max-width: 780px; margin: 0 auto; }
+    h1 { font-size: clamp(28px, 5vw, 50px); font-weight: 900; line-height: 1.1; text-align: center; margin-bottom: 16px; }
+    h2 { font-size: clamp(20px, 3.5vw, 32px); font-weight: 700; line-height: 1.25; margin-bottom: 14px; }
+    h3 { font-size: 22px; font-weight: 700; margin-bottom: 12px; color: #fff; }
+    p { font-size: 17px; color: #c8cfdf; margin-bottom: 18px; }
+    .subhead { font-size: clamp(15px, 2.2vw, 19px); color: #c8cfdf; text-align: center; max-width: 640px; margin: 0 auto 36px; }
+
+    /* BADGE */
+    .badge { display: inline-block; background: #e94560; color: #fff; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 6px 16px; border-radius: 20px; margin-bottom: 22px; }
+
+    /* BUTTONS */
+    .btn-cta { display: block; max-width: 500px; margin: 0 auto 12px; padding: 20px 36px; background: #e94560; color: #fff; font-size: 20px; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; text-align: center; text-decoration: none; }
+    .btn-cta:hover { background: #c73350; }
+    .btn-sub { font-size: 13px; color: #8899aa; text-align: center; display: block; max-width: 500px; margin: 0 auto 40px; }
+
+    /* HERO PRICE DISPLAY */
+    .founding-price { font-size: clamp(48px, 8vw, 80px); font-weight: 900; color: #e94560; line-height: 1; }
+    .full-price { font-size: 18px; color: #8899aa; text-decoration: line-through; margin-top: 4px; }
+    .price-note { font-size: 15px; color: #aabbd0; margin-top: 8px; }
+
+    /* LADDER */
+    .price-ladder { background: #0a0a1a; border: 1px solid #1e3a60; border-radius: 12px; padding: 28px 32px; max-width: 580px; margin: 0 auto 40px; }
+    .price-ladder h4 { font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; color: #8899aa; margin-bottom: 18px; }
+    .ladder-row { display: flex; align-items: center; gap: 16px; padding: 10px 0; border-bottom: 1px solid #1e2e4a; }
+    .ladder-row:last-child { border-bottom: none; }
+    .ladder-price { font-size: 20px; font-weight: 800; min-width: 60px; }
+    .ladder-price.current { color: #e94560; }
+    .ladder-price.future { color: #556677; }
+    .ladder-desc { font-size: 14px; color: #aabbd0; }
+    .ladder-desc strong { color: #e94560; }
+    .ladder-arrow { font-size: 18px; color: #556677; }
+    .you-are-here { font-size: 11px; background: #e94560; color: #fff; padding: 2px 8px; border-radius: 10px; font-weight: 700; letter-spacing: 0.05em; margin-left: 8px; vertical-align: middle; }
+
+    /* BUNDLE ITEMS */
+    .bundle-grid { display: grid; grid-template-columns: 1fr; gap: 14px; margin: 32px 0; }
+    .bundle-item { background: #0f3460; border-radius: 8px; padding: 20px 22px; display: flex; gap: 16px; align-items: flex-start; }
+    .bundle-item.bonus { border: 1px solid #e94560; }
+    .bundle-num { background: #e94560; color: #fff; font-size: 13px; font-weight: 800; min-width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+    .bundle-num.star { background: #1a1a2e; border: 2px solid #e94560; color: #e94560; font-size: 16px; }
+    .bundle-item h4 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+    .bundle-item p { font-size: 14px; color: #aabbd0; margin: 0; line-height: 1.5; }
+    .bundle-tag { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #e94560; font-weight: 700; margin-bottom: 4px; display: block; }
+    .standalone-price { font-size: 12px; color: #556677; margin-top: 6px !important; }
+
+    /* WORKFLOW STEPS */
+    .workflow { display: grid; grid-template-columns: 1fr; gap: 0; margin: 24px 0; }
+    .workflow-step { display: flex; gap: 20px; align-items: flex-start; padding: 18px 0; border-bottom: 1px solid #1e2e4a; }
+    .workflow-step:last-child { border-bottom: none; }
+    .step-num { font-size: 26px; font-weight: 900; color: #e94560; min-width: 36px; line-height: 1; }
+    .step-body h4 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+    .step-body p { font-size: 14px; color: #aabbd0; margin: 0; }
+
+    /* LIVING PROGRAM */
+    .living-box { background: #0b1628; border-left: 4px solid #e94560; border-radius: 0 8px 8px 0; padding: 24px 28px; max-width: 680px; margin: 0 auto 32px; }
+    .living-box h3 { font-size: 18px; color: #fff; margin-bottom: 10px; }
+    .living-box p { font-size: 15px; margin-bottom: 0; }
+
+    /* MODULE ROADMAP */
+    .roadmap-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 24px 0; }
+    .roadmap-item { display: flex; gap: 14px; align-items: flex-start; padding: 14px 16px; background: #0f3460; border-radius: 6px; }
+    .roadmap-item.live { border-left: 3px solid #e94560; }
+    .roadmap-item.building { border-left: 3px solid #556677; opacity: 0.8; }
+    .roadmap-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; min-width: 60px; }
+    .roadmap-label.live-label { color: #e94560; }
+    .roadmap-label.building-label { color: #556677; }
+    .roadmap-text { font-size: 14px; color: #c8cfdf; }
+
+    /* ABOUT */
+    .about-section { background: #0f3460; }
+    .about-inner { max-width: 680px; margin: 0 auto; display: flex; gap: 32px; align-items: flex-start; }
+    .avatar { width: 100px; height: 100px; border-radius: 50%; background: #1a1a2e; border: 3px solid #e94560; display: flex; align-items: center; justify-content: center; font-size: 40px; flex-shrink: 0; }
+
+    /* FAQ */
+    .faq-item { border-bottom: 1px solid #1e2e4a; padding: 20px 0; }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-q { font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+    .faq-a { font-size: 15px; color: #aabbd0; margin: 0; }
+
+    .footer { text-align: center; padding: 24px; font-size: 12px; color: #556; }
+
+    /* Urgency strip */
+    .urgency-strip { background: #e94560; color: #fff; text-align: center; padding: 12px 24px; font-size: 15px; font-weight: 700; letter-spacing: 0.02em; }
+    .urgency-strip span { font-weight: 400; opacity: 0.9; }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">AI for Real Life &nbsp;|&nbsp; Khalil Chapman</div>
+
+  <!-- URGENCY STRIP -->
+  <div class="urgency-strip">
+    🎬 Founding Member Price: $49 &nbsp;<span>— Goes to $97 when Module 1 is complete. Lock in now.</span>
+  </div>
+
+  <!-- ── HERO ── -->
+  <section>
+    <div class="inner" style="text-align:center;">
+      <span class="badge">Founding Member Bundle</span>
+      <h1>Get In At the Lowest Price This Will Ever Be</h1>
+      <p class="subhead">AI for Real Filmmakers is a living program — built to grow continuously as the tools evolve. The foundation never changes. The resources never stop. And right now, you can get 1-year access at the price it will never be again.</p>
+
+      <div style="margin-bottom:24px;">
+        <div class="founding-price">$49</div>
+        <div class="full-price">Full price: $497</div>
+        <div class="price-note">1-year access — not a subscription. Price locks in at $49 forever.</div>
+      </div>
+
+      <!-- PRICE LADDER -->
+      <div class="price-ladder">
+        <h4>Price increases at each milestone</h4>
+        <div class="ladder-row">
+          <div class="ladder-price current">$49</div>
+          <div class="ladder-arrow">→</div>
+          <div class="ladder-desc"><strong>Right now</strong> — Founding Member Bundle. The lowest price it will ever be. <span class="you-are-here">You are here</span></div>
+        </div>
+        <div class="ladder-row">
+          <div class="ladder-price future">$97</div>
+          <div class="ladder-arrow">→</div>
+          <div class="ladder-desc">Module 1 fully recorded (all 10 lessons live)</div>
+        </div>
+        <div class="ladder-row">
+          <div class="ladder-price future">$197</div>
+          <div class="ladder-arrow">→</div>
+          <div class="ladder-desc">Module 2 complete + 10 tool guides in the library</div>
+        </div>
+        <div class="ladder-row">
+          <div class="ladder-price future">$297</div>
+          <div class="ladder-arrow">→</div>
+          <div class="ladder-desc">Modules 1–4 complete + 20+ resources</div>
+        </div>
+        <div class="ladder-row">
+          <div class="ladder-price future">$497</div>
+          <div class="ladder-arrow">→</div>
+          <div class="ladder-desc">Full program complete — all 9 modules + complete library</div>
+        </div>
+      </div>
+
+      <a href="prelaunch-checkout.html" class="btn-cta">Get Founding Member Access — $49 →</a>
+      <span class="btn-sub">1-Year Access &nbsp;·&nbsp; Price locks in forever &nbsp;·&nbsp; Every update included</span>
+    </div>
+  </section>
+
+  <!-- ── THE PROBLEM ── -->
+  <section style="background:#0f3460; padding:52px 24px;">
+    <div class="inner" style="max-width:700px;">
+      <h2>Most AI courses are outdated before you finish them.</h2>
+      <p>The tools change every few weeks. The techniques that worked last quarter don't work anymore. And the courses built around specific tools are already behind before you open lesson one.</p>
+      <p>That's not a course problem. That's a format problem.</p>
+      <p>AI for Real Filmmakers is built differently. The foundation — workflow, story structure, cinematic process — never changes. But the tool-specific guides, resources, and breakdowns get updated continuously as the technology evolves.</p>
+      <p style="margin-bottom:0;"><strong style="color:#fff;">You're not buying a course. You're locking in access to a program that keeps up with the space.</strong></p>
+    </div>
+  </section>
+
+  <!-- ── WHAT'S INSIDE ── -->
+  <section>
+    <div class="inner">
+      <h2 style="text-align:center; margin-bottom:8px;">What's Inside the Founding Member Bundle</h2>
+      <p style="text-align:center; font-size:15px; color:#8899aa; margin-bottom:32px;">Everything you need to start building cinematic AI projects right now — plus access to the full program as it's built.</p>
+
+      <div class="bundle-grid">
+
+        <!-- CORE WORKFLOW: Steps 1-2-3 -->
+        <div style="font-size:13px; letter-spacing:0.1em; text-transform:uppercase; color:#8899aa; padding:0 4px; margin-bottom:-4px;">Core Workflow — 3 Guides</div>
+
+        <div class="bundle-item">
+          <div class="bundle-num">1</div>
+          <div>
+            <span class="bundle-tag">Step 1 — Plan</span>
+            <h4>AI Film Project Setup Guide</h4>
+            <p>Lock your story, characters, and visual style before you generate anything. The step-by-step system that prevents chaos before it starts.</p>
+            <p class="standalone-price">Sells standalone for $8.99</p>
+          </div>
+        </div>
+
+        <div class="bundle-item">
+          <div class="bundle-num">2</div>
+          <div>
+            <span class="bundle-tag">Step 2 — Execute</span>
+            <h4>Story-Driven AI Video: The 11-Step Cinematic Guide</h4>
+            <p>The complete cinematic workflow for creating AI videos that actually look like film — clear, repeatable, and built around story first.</p>
+            <p class="standalone-price">Sells standalone for $7.99</p>
+          </div>
+        </div>
+
+        <div class="bundle-item">
+          <div class="bundle-num">3</div>
+          <div>
+            <span class="bundle-tag">Step 3 — Polish</span>
+            <h4>A Guide for Realistic Speech in AI Video</h4>
+            <p>Fix AI dialogue and performance using two proven workflows. The finishing step that separates amateur output from something you'd actually share.</p>
+            <p class="standalone-price">Sells standalone for $3.99</p>
+          </div>
+        </div>
+
+        <!-- BONUS ITEMS -->
+        <div style="font-size:13px; letter-spacing:0.1em; text-transform:uppercase; color:#8899aa; padding:0 4px; margin-top:8px; margin-bottom:-4px;">Founding Member Bonuses</div>
+
+        <div class="bundle-item bonus">
+          <div class="bundle-num star">★</div>
+          <div>
+            <span class="bundle-tag">Bonus 1 — Tool Breakdown</span>
+            <h4>Kling 3.0 Omni Starter Kit</h4>
+            <p>A current breakdown of Kling 3.0 Omni — what it does, how to use it, and what to expect. This is exactly what the living library looks like in practice: tool-specific guides added as the technology evolves.</p>
+          </div>
+        </div>
+
+        <div class="bundle-item bonus">
+          <div class="bundle-num star">★</div>
+          <div>
+            <span class="bundle-tag">Bonus 2 — Mini Course</span>
+            <h4>The Film Bible Mini Course</h4>
+            <p>The most powerful concept in cinematic AI filmmaking: building a Single Source of Truth before you generate a single frame. 3–5 short video lessons taken directly from Module 1 of the full program. This is the #1 thing separating consistent AI filmmakers from everyone else.</p>
+          </div>
+        </div>
+
+        <!-- 1-YEAR ACCESS -->
+        <div class="bundle-item" style="border: 1px solid #1e4a80; background: #0b1628;">
+          <div class="bundle-num" style="background:#1e4a80;">∞</div>
+          <div>
+            <span class="bundle-tag" style="color:#aabbd0;">Included — 1-Year Access</span>
+            <h4>Full Program Access as It's Built</h4>
+            <p>Every new module, guide, tool breakdown, and resource added to AI for Real Filmmakers for the next year — included at no extra cost. Module 1 (10 lessons, fully scripted) is being recorded now. You'll be notified the moment new content goes live.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="text-align:center; margin-top:12px; padding:16px; background:#0a0a1a; border-radius:8px; max-width:560px; margin: 24px auto 0;">
+        <p style="font-size:14px; color:#8899aa; margin-bottom:4px;">All 3 guides sold separately = <s>$20.97</s></p>
+        <p style="font-size:22px; font-weight:900; color:#fff; margin-bottom:0;">Founding Member Bundle: <span style="color:#e94560;">$49</span></p>
+        <p style="font-size:13px; color:#8899aa; margin-top:4px; margin-bottom:0;">Includes bonuses + 1-year full program access</p>
+      </div>
+
+      <div style="text-align:center; margin-top:32px;">
+        <a href="prelaunch-checkout.html" class="btn-cta">Get Founding Member Access — $49 →</a>
+        <span class="btn-sub">1-Year Access &nbsp;·&nbsp; Price locks in at $49 forever &nbsp;·&nbsp; Every update included</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── THE WORKFLOW SEQUENCE ── -->
+  <section style="background:#0f3460; padding:52px 24px;">
+    <div class="inner" style="max-width:700px;">
+      <h2 style="text-align:center; margin-bottom:8px;">The Three-Step Workflow Inside the Bundle</h2>
+      <p style="text-align:center; font-size:15px; color:#8899aa; margin-bottom:28px;">The three guides follow a natural sequence. Together they become a complete production workflow.</p>
+      <div class="workflow">
+        <div class="workflow-step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h4>Plan Before You Generate</h4>
+            <p>Lock story, characters, and visual style using the AI Film Project Setup Guide. Do this first — it prevents every problem that comes later.</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h4>Execute the Cinematic Workflow</h4>
+            <p>Follow the 11-step system to go from locked concept through to finished cinematic AI video — repeatable on any project, with any tool.</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h4>Polish the Final Output</h4>
+            <p>Use the Realistic Speech guide to fix AI dialogue and performance. The step most people skip — and the one that makes the biggest visible difference.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── THE LIVING PROGRAM ── -->
+  <section>
+    <div class="inner" style="max-width:720px;">
+      <h2 style="text-align:center; margin-bottom:28px;">What "Living Program" Actually Means</h2>
+
+      <div class="living-box">
+        <h3>The foundation never goes stale.</h3>
+        <p>Story structure, cinematic process, and filmmaking workflow don't change when Kling releases a new model or Sora updates its interface. The core of this program is built on principles that hold regardless of which tool is currently winning.</p>
+      </div>
+
+      <div class="living-box">
+        <h3>The tool guides keep up with the space.</h3>
+        <p>As new AI tools launch, update, or replace old ones, new guides get added to the library. That's what the Kling 3.0 Omni Starter Kit in this bundle is — a live example of exactly what ongoing updates look like. Founding members get every one of these as they're added.</p>
+      </div>
+
+      <div class="living-box">
+        <h3>You're locked in at $49. Forever.</h3>
+        <p>When the price increases — and it will, at each milestone — your rate doesn't change. You bought in as a founding member. That price is yours for the life of your access, regardless of where the full program price ends up.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WHAT'S COMING ── -->
+  <section style="background:#0f3460; padding:52px 24px;">
+    <div class="inner" style="max-width:720px;">
+      <h2 style="text-align:center; margin-bottom:8px;">The Full Program Roadmap</h2>
+      <p style="text-align:center; font-size:15px; color:#8899aa; margin-bottom:28px;">Founding members get access to everything below as it's built — at no additional cost.</p>
+
+      <div class="roadmap-grid">
+        <div class="roadmap-item live">
+          <div class="roadmap-label live-label">Live Now</div>
+          <div class="roadmap-text">Founding Member Bundle — 3 core workflow guides + Film Bible Mini Course + Kling 3.0 Starter Kit</div>
+        </div>
+        <div class="roadmap-item building">
+          <div class="roadmap-label building-label">Module 1</div>
+          <div class="roadmap-text">Decide First, Generate Second — 10 fully scripted lessons on story locking, Film Bible, character casting, and visual style (recording now)</div>
+        </div>
+        <div class="roadmap-item building">
+          <div class="roadmap-label building-label">Module 2</div>
+          <div class="roadmap-text">Beat Mapping — Translating story into visual sequence and shot identification</div>
+        </div>
+        <div class="roadmap-item building">
+          <div class="roadmap-label building-label">Module 3</div>
+          <div class="roadmap-text">Character & World Design — Consistent characters, environments, and reference assets</div>
+        </div>
+        <div class="roadmap-item building">
+          <div class="roadmap-label building-label">Module 4</div>
+          <div class="roadmap-text">Shot Planning — Shot lists, visual storytelling, and camera language for AI</div>
+        </div>
+        <div class="roadmap-item building">
+          <div class="roadmap-label building-label">Module 5</div>
+          <div class="roadmap-text">AI Image Generation — Cinematic image creation, prompt structure, style consistency</div>
+        </div>
+        <div class="roadmap-item building">
+          <div class="roadmap-label building-label">Module 6</div>
+          <div class="roadmap-text">AI Video Generation — Image-to-video workflows, motion control, current tool breakdowns</div>
+        </div>
+        <div class="roadmap-item building">
+          <div class="roadmap-label building-label">Module 7</div>
+          <div class="roadmap-text">Editing & Assembly — Assembling clips, pacing, color, and sound design basics</div>
+        </div>
+        <div class="roadmap-item building">
+          <div class="roadmap-label building-label">Library</div>
+          <div class="roadmap-text">Ongoing tool guides, new model breakdowns, prompt libraries — added weekly/monthly as the AI landscape evolves</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ABOUT KHALIL ── -->
+  <section class="about-section">
+    <div class="inner">
+      <div class="about-inner">
+        <div class="avatar">K</div>
+        <div>
+          <h3>About Khalil Chapman (Kalo)</h3>
+          <p>Khalil Chapman has spent years deep in the AI filmmaking space — testing every tool that exists and building a cinematic workflow from the ground up. He's produced projects like <em>The Switch</em>, <em>Crazy in Valencia</em>, <em>Zero Sum Game</em>, and the <em>Lazy Mon</em> storytelling universe.</p>
+          <p style="margin-bottom:0;">AI for Real Filmmakers is built directly from the workflow he uses on every project. Not theory, not experiments — a real production pipeline designed for the AI era.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA SECTION ── -->
+  <section>
+    <div class="inner" style="text-align:center; max-width:680px;">
+      <span class="badge">Founding Member Price</span>
+      <h2 style="margin-bottom:8px;">Get Access Before the Price Goes Up</h2>
+      <p style="font-size:15px; color:#8899aa; margin-bottom:28px;">Module 1 recording starts soon. When it's done, the price moves to $97. This is the only time you'll be able to get in at $49.</p>
+
+      <div style="margin-bottom:28px;">
+        <div class="founding-price">$49</div>
+        <div class="price-note">1-year access &nbsp;·&nbsp; Every update included &nbsp;·&nbsp; Price locked forever</div>
+      </div>
+
+      <a href="prelaunch-checkout.html" class="btn-cta">Yes — I'm In at $49 →</a>
+      <span class="btn-sub">Founding member rate &nbsp;·&nbsp; Price increases when Module 1 is complete</span>
+    </div>
+  </section>
+
+  <!-- ── FAQ ── -->
+  <section style="background:#0f3460;">
+    <div class="inner">
+      <h2 style="text-align:center; margin-bottom:32px;">Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <p class="faq-q">What exactly am I getting for $49?</p>
+        <p class="faq-a">You get the complete Founding Member Bundle: 3 core workflow guides (AI Film Project Setup, 11-Step Cinematic Guide, Realistic Speech Guide), the Kling 3.0 Omni Starter Kit, the Film Bible Mini Course, and 1-year access to the full AI for Real Filmmakers program as it's built — including all modules, guides, and library updates.</p>
+      </div>
+
+      <div class="faq-item">
+        <p class="faq-q">What does "1-year access" mean? Is this a subscription?</p>
+        <p class="faq-a">No. It's a one-time payment. You get full access to everything available now, plus everything added to the program over the next year — all for the $49 founding member price. No recurring charges.</p>
+      </div>
+
+      <div class="faq-item">
+        <p class="faq-q">What if the price goes up while I already have access?</p>
+        <p class="faq-a">It doesn't affect you. Your founding member price of $49 is locked in. As milestones are hit and the price climbs toward $497, your access and your rate stay exactly where they are.</p>
+      </div>
+
+      <div class="faq-item">
+        <p class="faq-q">When will Module 1 be ready?</p>
+        <p class="faq-a">Module 1 (10 fully scripted lessons) is currently being recorded. Founding members will be notified directly when it goes live. This is one of the first things you'll receive after purchasing.</p>
+      </div>
+
+      <div class="faq-item">
+        <p class="faq-q">Do I need filmmaking experience?</p>
+        <p class="faq-a">No. The system teaches cinematic thinking and AI tools together, from the ground up. If you've ever wanted to tell visual stories but weren't sure where to start, this is built for you.</p>
+      </div>
+
+      <div class="faq-item">
+        <p class="faq-q">Which AI tools do I need?</p>
+        <p class="faq-a">The program covers the most effective tools currently available and adds new tool guides as the landscape evolves. Most tools have free tiers — you don't need to spend a lot to get started.</p>
+      </div>
+
+      <div class="faq-item">
+        <p class="faq-q">Why is the price this low?</p>
+        <p class="faq-a">Because this is a pre-launch. The full program isn't complete yet — Module 1 is being recorded now, and the rest will be built out over the coming months. The $49 price reflects where the program is today, not where it's going. Early buyers take a small leap of faith; in exchange they get the lowest price it will ever be and founding member status.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── FINAL CTA ── -->
+  <section>
+    <div class="inner" style="max-width:640px; text-align:center;">
+      <p style="font-size:16px; color:#c8cfdf; font-style:italic; margin-bottom:28px;">The window to get in at $49 closes when Module 1 is done. After that, the price moves to $97 and this founding member offer goes away permanently. If you've been thinking about getting serious about AI filmmaking, there's no better time to lock in access.</p>
+      <a href="prelaunch-checkout.html" class="btn-cta">Get Founding Member Access — $49 →</a>
+      <span class="btn-sub">1-Year Access &nbsp;·&nbsp; $49 locked forever &nbsp;·&nbsp; Every update included</span>
+    </div>
+  </section>
+
+  <p class="footer">© AI for Real Life &nbsp;·&nbsp; Privacy &nbsp;·&nbsp; Terms</p>
+
+</body>
+</html>
