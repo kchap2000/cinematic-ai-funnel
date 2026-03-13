@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome, Founding Member — AI for Real Filmmakers</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #1a1a2e; color: #ffffff; font-family: 'Georgia', serif; line-height: 1.6; }
+
+    /* ── HEADER ── */
+    .header { background: #0f3460; text-align: center; padding: 20px 24px 16px; }
+    .logo-text { font-size: 18px; font-weight: 700; letter-spacing: 0.05em; }
+    .header-sub { font-size: 13px; color: #8899aa; margin-top: 6px; }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 720px;
+      margin: 56px auto 0;
+      padding: 0 24px;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(233, 69, 96, 0.15);
+      border: 1px solid rgba(233, 69, 96, 0.5);
+      color: #e94560;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 6px 18px;
+      border-radius: 20px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .hero h1 { font-size: 42px; font-weight: 900; line-height: 1.15; margin-bottom: 16px; }
+    @media (max-width: 580px) { .hero h1 { font-size: 30px; } }
+    .hero h1 span { color: #e94560; }
+    .hero p { font-size: 18px; color: #c8cfdf; max-width: 560px; margin: 0 auto; }
+
+    /* ── CONFIRMATION CARD ── */
+    .confirm-card {
+      max-width: 620px;
+      margin: 40px auto;
+      padding: 0 24px;
+    }
+    .confirm-inner {
+      background: linear-gradient(135deg, #0f3460 0%, #1a2a50 100%);
+      border: 2px solid #e94560;
+      border-radius: 16px;
+      padding: 32px;
+      text-align: center;
+    }
+    .confirm-icon { font-size: 52px; margin-bottom: 12px; }
+    .confirm-inner h2 { font-size: 24px; font-weight: 700; margin-bottom: 10px; }
+    .confirm-inner p { font-size: 15px; color: #c8cfdf; margin-bottom: 8px; }
+    .price-lock-badge {
+      display: inline-block;
+      background: #e94560;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 8px 24px;
+      border-radius: 6px;
+      margin-top: 16px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── SECTION WRAPPER ── */
+    .section { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+    .section-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .section-sub { font-size: 15px; color: #8899aa; margin-bottom: 24px; }
+    .divider { border: none; border-top: 1px solid #1e3a60; margin: 48px auto; max-width: 720px; }
+
+    /* ── BUNDLE ITEMS ── */
+    .bundle-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 8px;
+    }
+    @media (max-width: 600px) { .bundle-grid { grid-template-columns: 1fr; } }
+    .bundle-card {
+      background: #0f3460;
+      border-radius: 12px;
+      padding: 22px;
+      position: relative;
+    }
+    .bundle-card.bonus { border: 1px solid rgba(233, 69, 96, 0.3); }
+    .bundle-tag {
+      display: inline-block;
+      background: #e94560;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+    .bundle-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+    .bundle-card p { font-size: 13px; color: #8899aa; margin-bottom: 14px; }
+    .access-btn {
+      display: inline-block;
+      background: #e94560;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 8px 18px;
+      border-radius: 5px;
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: background 0.2s;
+    }
+    .access-btn:hover { background: #c73350; }
+    .access-btn.soon {
+      background: #2a4a6a;
+      color: #8899aa;
+      cursor: default;
+    }
+    .coming-note { font-size: 12px; color: #5a7a9a; margin-top: 6px; }
+
+    /* ── WHAT'S COMING ── */
+    .roadmap-list { list-style: none; }
+    .roadmap-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid #1e3a60;
+    }
+    .roadmap-list li:last-child { border-bottom: none; }
+    .module-num {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #0f3460;
+      border: 2px solid #e94560;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      color: #e94560;
+    }
+    .module-num.done { background: #e94560; color: #fff; border-color: #e94560; }
+    .module-info h4 { font-size: 16px; font-weight: 700; margin-bottom: 3px; }
+    .module-info p { font-size: 13px; color: #8899aa; }
+    .module-status {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-top: 4px;
+    }
+    .status-available { background: rgba(233, 69, 96, 0.2); color: #e94560; }
+    .status-building { background: rgba(26, 60, 100, 0.8); color: #8899aa; }
+
+    /* ── FEEDBACK / COMMUNITY ── */
+    .community-box {
+      background: #0f3460;
+      border-radius: 12px;
+      padding: 28px;
+      text-align: center;
+    }
+    .community-box h3 { font-size: 20px; font-weight: 700; margin-bottom: 10px; }
+    .community-box p { font-size: 15px; color: #c8cfdf; margin-bottom: 20px; max-width: 520px; margin-left: auto; margin-right: auto; }
+    .community-btn {
+      display: inline-block;
+      background: #e94560;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 14px 34px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .community-btn:hover { background: #c73350; }
+    .community-note { font-size: 13px; color: #5a7a9a; margin-top: 12px; }
+
+    /* ── PERSONAL NOTE ── */
+    .personal-note {
+      background: linear-gradient(135deg, #0f3460 0%, #1a2a50 100%);
+      border-left: 4px solid #e94560;
+      border-radius: 0 12px 12px 0;
+      padding: 28px 28px 28px 32px;
+    }
+    .personal-note p { font-size: 16px; color: #c8cfdf; margin-bottom: 14px; font-style: italic; }
+    .personal-note p:last-child { margin-bottom: 0; }
+    .personal-note .sig { font-style: normal; font-weight: 700; color: #fff; font-size: 17px; }
+    .personal-note .sig-sub { font-style: normal; font-size: 13px; color: #8899aa; }
+
+    /* ── SHARE ── */
+    .share-section { text-align: center; }
+    .share-section p { font-size: 15px; color: #c8cfdf; margin-bottom: 16px; }
+    .share-links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .share-btn {
+      display: inline-block;
+      padding: 10px 22px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .share-btn:hover { opacity: 0.85; }
+    .share-twitter { background: #1da1f2; color: #fff; }
+    .share-linkedin { background: #0a66c2; color: #fff; }
+    .share-copy { background: #0f3460; color: #c8cfdf; border: 1px solid #2a4a6a; cursor: pointer; border: none; font-family: 'Georgia', serif; }
+
+    .footer { text-align: center; padding: 40px 24px 24px; font-size: 12px; color: #556; }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo-text">AI for Real Life</div>
+    <div class="header-sub">You're in. Welcome to the founding cohort.</div>
+  </header>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-badge">🎬 Founding Member Confirmed</div>
+    <h1>You're <span>officially</span> in.</h1>
+    <p>Welcome to AI for Real Filmmakers — the living program built for filmmakers who want to create cinematic work with AI tools, starting now.</p>
+  </div>
+
+  <!-- CONFIRMATION CARD -->
+  <div class="confirm-card">
+    <div class="confirm-inner">
+      <div class="confirm-icon">✅</div>
+      <h2>Your Order Is Confirmed</h2>
+      <p>Check your inbox — your bundle access link and receipt are on their way.</p>
+      <p style="font-size:13px; color:#5a7a9a;">Didn't get it? Check spam or email <strong style="color:#c8cfdf;">support@aifoررeallife.com</strong></p>
+      <div class="price-lock-badge">🔒 $49 Founding Member Rate — Locked Forever</div>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- WHAT'S INSIDE NOW -->
+  <div class="section">
+    <p class="section-title">What's Ready for You Right Now</p>
+    <p class="section-sub">Start here. Your founding member bundle is live — dig in.</p>
+
+    <div class="bundle-grid">
+      <div class="bundle-card">
+        <div class="bundle-tag">Core Guide</div>
+        <h3>AI Filmmaking Quick-Start Guide</h3>
+        <p>Your first 5 moves. Start producing AI-assisted footage in hours, not weeks.</p>
+        <a href="#" class="access-btn">Access Guide →</a>
+      </div>
+
+      <div class="bundle-card">
+        <div class="bundle-tag">Core Guide</div>
+        <h3>Cinematic AI Workflow Guide</h3>
+        <p>The end-to-end process: pre-production through post, with AI in every step.</p>
+        <a href="#" class="access-btn">Access Guide →</a>
+      </div>
+
+      <div class="bundle-card">
+        <div class="bundle-tag">Core Guide</div>
+        <h3>AI Tools for Filmmakers — Field Guide</h3>
+        <p>Every major tool, what it does, when to use it, and what to skip.</p>
+        <a href="#" class="access-btn">Access Guide →</a>
+      </div>
+
+      <div class="bundle-card bonus">
+        <div class="bundle-tag">Bonus</div>
+        <h3>Kling 3.0 Starter Kit</h3>
+        <p>Prompts, settings, and sample sequences for cinematic video generation.</p>
+        <a href="#" class="access-btn">Access Kit →</a>
+      </div>
+
+      <div class="bundle-card bonus">
+        <div class="bundle-tag">Bonus</div>
+        <h3>Film Bible Mini Course</h3>
+        <p>Structure your concept before you generate a single frame. Build films that hold together.</p>
+        <a href="#" class="access-btn">Start Course →</a>
+      </div>
+
+      <div class="bundle-card">
+        <div class="bundle-tag">Community</div>
+        <h3>Private Founding Member Group</h3>
+        <p>Direct feedback, early access to new material, and a community of working filmmakers.</p>
+        <a href="#" class="access-btn">Join Community →</a>
+        <p class="coming-note">Invite sent to your email</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- WHAT'S COMING -->
+  <div class="section">
+    <p class="section-title">What's Coming — Your Full Roadmap</p>
+    <p class="section-sub">All 7 modules are included at your founding price. Here's what gets built next.</p>
+
+    <ul class="roadmap-list">
+      <li>
+        <div class="module-num done">✓</div>
+        <div class="module-info">
+          <h4>Foundation — AI Filmmaking Quick-Start + Toolkit</h4>
+          <p>Core guides, Kling 3.0 Kit, Film Bible Mini Course</p>
+          <span class="module-status status-available">Available Now</span>
+        </div>
+      </li>
+      <li>
+        <div class="module-num">1</div>
+        <div class="module-info">
+          <h4>Module 1 — Cinematography &amp; Prompting Mastery</h4>
+          <p>Camera language, shot design, visual storytelling — applied to AI generation</p>
+          <span class="module-status status-building">In Development</span>
+        </div>
+      </li>
+      <li>
+        <div class="module-num">2</div>
+        <div class="module-info">
+          <h4>Module 2 — Pre-Production with AI</h4>
+          <p>Scripts, storyboards, style references, and production planning with AI assistance</p>
+          <span class="module-status status-building">Coming Soon</span>
+        </div>
+      </li>
+      <li>
+        <div class="module-num">3</div>
+        <div class="module-info">
+          <h4>Module 3 — AI Video Production</h4>
+          <p>Generating footage, maintaining consistency, directing AI like a DP</p>
+          <span class="module-status status-building">Coming Soon</span>
+        </div>
+      </li>
+      <li>
+        <div class="module-num">4</div>
+        <div class="module-info">
+          <h4>Module 4 — Audio, Music &amp; Sound Design</h4>
+          <p>Voice, score, SFX, and the full audio pipeline for AI-generated films</p>
+          <span class="module-status status-building">Coming Soon</span>
+        </div>
+      </li>
+      <li>
+        <div class="module-num">5</div>
+        <div class="module-info">
+          <h4>Module 5 — Post-Production &amp; VFX</h4>
+          <p>Editing, color, compositing, and enhancement with AI tools</p>
+          <span class="module-status status-building">Coming Soon</span>
+        </div>
+      </li>
+      <li>
+        <div class="module-num">6</div>
+        <div class="module-info">
+          <h4>Module 6 — Building Your AI Film Business</h4>
+          <p>Clients, pricing, workflow efficiency, and positioning in the market</p>
+          <span class="module-status status-building">Coming Soon</span>
+        </div>
+      </li>
+      <li>
+        <div class="module-num">7</div>
+        <div class="module-info">
+          <h4>Module 7 — Distribution &amp; Getting Seen</h4>
+          <p>Film festivals, YouTube, social, and licensing your AI work</p>
+          <span class="module-status status-building">Coming Soon</span>
+        </div>
+      </li>
+      <li>
+        <div class="module-num" style="font-size:11px; width:40px; border-radius:6px;">LIB</div>
+        <div class="module-info">
+          <h4>The AI Filmmaker's Library</h4>
+          <p>Growing resource vault: prompt templates, tool reviews, case studies, project files</p>
+          <span class="module-status status-building">Ongoing — Updated Monthly</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- PERSONAL NOTE FROM KHALIL -->
+  <div class="section" style="margin-bottom: 48px;">
+    <p class="section-title">A Note From Khalil</p>
+    <div class="personal-note" style="margin-top: 20px;">
+      <p>"You're not just a customer — you're part of building this thing. Founding members get direct access to me during development. Your feedback shapes what gets built next: which tools we cover first, what workflows we go deep on, and how the community grows."</p>
+      <p>"If something isn't clicking, isn't useful, or isn't what you expected — tell me. That's the deal. You're investing in something that's still being forged, and your voice is part of the forge."</p>
+      <p>"Watch your inbox for the official welcome email and your community invite. I'll see you in there."</p>
+      <p class="sig">— Khalil</p>
+      <p class="sig-sub">Creator, AI for Real Filmmakers</p>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- FEEDBACK / COMMUNITY -->
+  <div class="section" style="margin-bottom: 48px;">
+    <div class="community-box">
+      <h3>🎥 Join Your Founding Member Community</h3>
+      <p>Connect with fellow filmmakers, share your first AI projects, and get direct feedback. This is where the real learning happens — and where you'll have Khalil's ear during development.</p>
+      <a href="#" class="community-btn">Join the Community →</a>
+      <p class="community-note">Invite link sent to your email — check inbox + spam</p>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- SHARE -->
+  <div class="section share-section" style="margin-bottom: 56px;">
+    <p>Know another filmmaker who should be in on this at $49?</p>
+    <div class="share-links">
+      <a href="https://twitter.com/intent/tweet?text=Just+joined+AI+for+Real+Filmmakers+as+a+founding+member+%E2%80%94+$49+for+lifetime+access+to+a+full+AI+filmmaking+curriculum.+If+you%27re+a+filmmaker%2C+get+in+while+the+price+is+low.+%5BLINK%5D" target="_blank" class="share-btn share-twitter">Share on X / Twitter</a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=LINK" target="_blank" class="share-btn share-linkedin">Share on LinkedIn</a>
+      <button class="share-btn share-copy" onclick="navigator.clipboard.writeText(window.location.href).then(()=>this.textContent='Copied!')">Copy Link</button>
+    </div>
+  </div>
+
+  <p class="footer">© AI for Real Life &nbsp;·&nbsp; Privacy &nbsp;·&nbsp; Terms &nbsp;·&nbsp; Support<br/>You're receiving this because you purchased AI for Real Filmmakers.</p>
+
+</body>
+</html>
